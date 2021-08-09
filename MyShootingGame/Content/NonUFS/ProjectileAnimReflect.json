@@ -1,0 +1,53 @@
+{
+    "list" :[
+        {
+            "cond" : [     
+                {
+                    "type" : "SpecialFireReleased"
+                }               
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 40001,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 50,
+                    "r": 0,
+                    "g": 0,
+                    "b": 255
+                }
+            ]
+        },
+        {
+            "cond" : [
+                {
+                    "type" : "DestroyProjectile",
+                    "blockDestroy" : true
+                },            
+                {
+                    "type" : "CompareIndex",
+                    "index" : 40001
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 401,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 180,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 0,
+                    "g": 0,
+                    "b": 255
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,216 @@
+{
+    "list" :[
+        {
+            "cond" : [
+                {
+                    "type" : "FirePressed"
+                },            
+                {
+                    "type" : "SpecialFirePressed"
+                },               
+                {
+                    "type" : "FriePressedTime",
+                    "min" : 0,
+                    "max" : 1
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 30001,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 50,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 30002,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : -45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 50,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 30003,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 50,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                }
+            ]
+        },
+        {
+            "cond" : [
+                {
+                    "type" : "DestroyProjectile"
+                },            
+                {
+                    "type" : "CompareIndex",
+                    "index" : 30001
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 301,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 302,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : -45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 303,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                }
+            ]
+        },
+        {
+            "cond" : [
+                {
+                    "type" : "DestroyProjectile"
+                },            
+                {
+                    "type" : "CompareIndex",
+                    "index" : 30002
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 301,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 302,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : -45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 303,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                }
+            ]
+        },
+        {
+            "cond" : [
+                {
+                    "type" : "DestroyProjectile"
+                },            
+                {
+                    "type" : "CompareIndex",
+                    "index" : 30003
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 301,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 302,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : -45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                {
+                    "type" : "Projectile",
+                    "index" : 303,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 45,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 0,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "list" :[
+        {
+            "cond" : [
+                {
+                    "type" : "FireReleased"
+                },
+                {
+                    "type" : "FriePressedTime",
+                    "min" : 0,
+                    "max" : 3
+                }
+            ],
+            "exec" : [
+                {
+                    "type" : "Projectile",
+                    "index" : 10001,                    
+                    "lifetime" : 3,
+                    "speed" : 100,
+                    "scale" : 1,
+                    "angle" : 0,
+                    "LocDirOffset" : 20,
+                    "LocHeightOffset" : 50,
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                }
+            ]
+        }
+    ]
+}
