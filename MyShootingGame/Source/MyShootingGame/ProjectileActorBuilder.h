@@ -31,13 +31,23 @@ struct FExecuteProjectile
 	FString		ExecType;
 	int				ExecIndex;
 	
-	float			ExecLifeTime;
-	float			ExecSpeed;
-	float			ExecScale;
-	float			ExecAngle;
-	float			ExecLocDirOffset;
-	float			ExecHeightOffset;
-	FColor		ExecColor;
+	double			ExecLifeTime;
+	double			ExecSpeed;
+	double			ExecScale;
+	double			ExecAngle;
+	double			ExecLocDirOffset;
+	double			ExecHeightOffset;
+	FColor			ExecColor;
+
+	FExecuteProjectile()
+		: ExecIndex(0),
+		ExecLifeTime(0),
+		ExecSpeed(0),
+		ExecScale(0),
+		ExecAngle(0),
+		ExecLocDirOffset(0),
+		ExecHeightOffset(0)
+	{}
 };
 
 USTRUCT()

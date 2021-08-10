@@ -61,10 +61,11 @@ void UProjectileActorBuilder::LoadAnimFile(FString InFileRefPath)
 			FConditionProjectile ProjCond;
 			const TSharedPtr<FJsonObject>& CondObj = CondJson->AsObject();
 			ProjCond.ConditionType = CondObj->GetStringField(TEXT("type"));
-			ProjCond.ConditionMin = CondObj->HasField(TEXT("min")) ? CondObj->GetIntegerField(TEXT("min")) : -1;
-			ProjCond.ConditionMax = CondObj->HasField(TEXT("max")) ? CondObj->GetIntegerField(TEXT("max")) : -1;
-			ProjCond.ConditionIndex = CondObj->HasField(TEXT("index")) ? CondObj->GetIntegerField(TEXT("index")) : -1;
-			ProjCond.ConditionBlockDestory = CondObj->HasField(TEXT("blockDestroy")) ? CondObj->GetIntegerField(TEXT("blockDestroy")) : false;
+
+			CondObj->TryGetNumberField(TEXT("min"), ProjCond.ConditionMin);
+			CondObj->TryGetNumberField(TEXT("max"), ProjCond.ConditionMax);
+			CondObj->TryGetNumberField(TEXT("index"), ProjCond.ConditionIndex);
+			ProjCond.ConditionBlockDestory = CondObj->HasField(TEXT("blockDestroy")) ? CondObj->GetBoolField(TEXT("blockDestroy")) : false;
 
 			ProjAnim.ConditionList.Add(ProjCond);
 		}
@@ -76,18 +77,23 @@ void UProjectileActorBuilder::LoadAnimFile(FString InFileRefPath)
 			FExecuteProjectile ProjExec;
 			const TSharedPtr<FJsonObject>& ExecObj = ExecJson->AsObject();
 			ProjExec.ExecType = ExecObj->GetStringField(TEXT("type"));
-			ProjExec.ExecIndex = ExecObj->GetIntegerField(TEXT("index"));
-			ProjExec.ExecLifeTime = ExecObj->GetNumberField(TEXT("lifetime"));
-			ProjExec.ExecSpeed = ExecObj->GetNumberField(TEXT("speed"));
-			ProjExec.ExecScale = ExecObj->GetNumberField(TEXT("scale"));
-			ProjExec.ExecAngle = ExecObj->GetNumberField(TEXT("angle"));
-			ProjExec.ExecLocDirOffset = ExecObj->GetNumberField(TEXT("LocDirOffset"));
-			ProjExec.ExecHeightOffset = ExecObj->GetNumberField(TEXT("LocHeightOffset"));
+			ExecObj->TryGetNumberField(TEXT("index"), ProjExec.ExecIndex);
+			ExecObj->TryGetNumberField(TEXT("lifetime"), ProjExec.ExecLifeTime);
 
+			ExecObj->TryGetNumberField(TEXT("speed"), ProjExec.ExecSpeed);
+			ExecObj->TryGetNumberField(TEXT("scale"), ProjExec.ExecScale);
+			ExecObj->TryGetNumberField(TEXT("angle"), ProjExec.ExecAngle);
+			ExecObj->TryGetNumberField(TEXT("LocDirOffset"), ProjExec.ExecLocDirOffset);
+			ExecObj->TryGetNumberField(TEXT("LocHeightOffset"), ProjExec.ExecHeightOffset);
 
-			ProjExec.ExecColor.R = ExecObj->HasField(TEXT("r")) ? ExecObj->GetIntegerField(TEXT("r")) : 0;
-			ProjExec.ExecColor.G = ExecObj->HasField(TEXT("g")) ? ExecObj->GetIntegerField(TEXT("g")) : 0;
-			ProjExec.ExecColor.B = ExecObj->HasField(TEXT("b")) ? ExecObj->GetIntegerField(TEXT("b")) : 0;
+			int r = 0, g = 0, b = 0;
+			ExecObj->TryGetNumberField(TEXT("r"), r);
+			ExecObj->TryGetNumberField(TEXT("g"), g);
+			ExecObj->TryGetNumberField(TEXT("b"), b);
+
+			ProjExec.ExecColor.R = r;
+			ProjExec.ExecColor.G = g;
+			ProjExec.ExecColor.B = b;
 			ProjExec.ExecColor.A = 255.f;
 			ProjAnim.ExecList.Add(ProjExec);
 		}
@@ -125,7 +131,7 @@ bool UProjectileActorBuilder::_CheckCondition(class AActor* InTriggingActor, con
 
 		if (ProjCond.ConditionType == TEXT("FriePressedTime"))
 		{
-			float pressedTime = mGameMode->GetFirePressedTime();
+			const float pressedTime = mGameMode->GetFirePressedTime();
 			if (0 < ProjCond.ConditionMin)
 			{
 				if (pressedTime < ProjCond.ConditionMin)
@@ -186,6 +192,22 @@ void UProjectileActorBuilder::_Exec(class AActor* InTriggingActor, const TArray<
 			projectileParam.mColor = ProjExec.ExecColor;
 
 			mGameMode->SpawnProjectile(TEXT("/Game/SideScrollerCPP/Blueprints/ProjectileActor_Base.ProjectileActor_Base_C"), projectileParam);
+		}
+
+		else if (ProjExec.ExecType == TEXT("UiCount"))
+		{
+			mGameMode->IncreaseProjCount(ProjExec.ExecIndex);
+		}
+
+		else if (ProjExec.ExecType == TEXT("HideCharging"))
+		{
+			mGameMode->HideCharging();
+		}
+
+		else if (ProjExec.ExecType == TEXT("IncFireCharging"))
+		{
+			const float MaxTime = ProjExec.ExecLifeTime;
+			mGameMode->IncreaseCharging(MaxTime);
 		}
 	}
 }

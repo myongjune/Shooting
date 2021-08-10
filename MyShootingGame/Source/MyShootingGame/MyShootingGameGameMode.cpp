@@ -6,6 +6,7 @@
 #include "ProjectileActor.h"
 #include "Kismet/GameplayStatics.h"
 #include "ProjectileActorBuilder.h"
+#include "MSHudWidget.h"
 
 AMyShootingGameGameMode::AMyShootingGameGameMode()
 {
@@ -26,10 +27,16 @@ AMyShootingGameGameMode::AMyShootingGameGameMode()
 	mActionBuilder = NewObject<UProjectileActorBuilder>(this, UProjectileActorBuilder::StaticClass(), TEXT("ActionBuilder"));
 }
 
-void AMyShootingGameGameMode::StartPlay()
+void AMyShootingGameGameMode::BeginPlay()
 {
-	Super::StartPlay();
+	Super::BeginPlay();
 	mActionBuilder->InitBuilder(this);
+
+	UClass* WidgetClass = StaticLoadClass(UMSHudWidget::StaticClass(), nullptr,
+		TEXT("/Game/SideScrollerCPP/Blueprints/WBP_ShootingHUDWidget.WBP_ShootingHUDWidget_C"));
+
+	mHudWidget = CreateWidget<UMSHudWidget>(GetWorld(), WidgetClass);
+	mHudWidget->AddToViewport();
 }
 
 void AMyShootingGameGameMode::TouchFireStart()
@@ -93,6 +100,20 @@ void AMyShootingGameGameMode::SpawnProjectile(FString InPath, const FProjectileP
 
 	if(ProjectileActor)
 		ProjectileActor->InitProjectile( InParam);
+}
+
+void AMyShootingGameGameMode::IncreaseProjCount(int32 InIndex)
+{
+	mHudWidget->IncreaseProjCount(InIndex, 1);
+}
+
+void AMyShootingGameGameMode::IncreaseCharging(float InMax)
+{
+	mHudWidget->IncreaseCharging(InMax);
+}
+void AMyShootingGameGameMode::HideCharging()
+{
+	mHudWidget->HideCharging();
 }
 
 float AMyShootingGameGameMode::GetFirePressedTime() const

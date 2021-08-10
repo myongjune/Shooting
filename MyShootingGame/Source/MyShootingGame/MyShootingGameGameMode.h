@@ -16,6 +16,9 @@ protected:
 	UPROPERTY()
 	class UProjectileActorBuilder* mActionBuilder;
 
+	UPROPERTY()
+	class UMSHudWidget*		mHudWidget;
+
 protected:
 	bool		mIsTouchedFire;
 	bool		mIsReleasedFire;
@@ -27,7 +30,7 @@ protected:
 
 
 public:
-	virtual void StartPlay() override; 
+	virtual void BeginPlay() override;
 
 public:
 	// Fire 버튼 눌렀을 때
@@ -45,6 +48,9 @@ public:
 
 public:
 	void SpawnProjectile(FString InPath, const FProjectileParam& InParam);	
+	void IncreaseProjCount(int32 InIndex);
+	void IncreaseCharging(float InMax);
+	void HideCharging();
 
 public:
 	bool IsFirePressed() const				{ return mIsTouchedFire; }
